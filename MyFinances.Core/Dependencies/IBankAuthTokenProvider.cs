@@ -8,7 +8,7 @@ namespace MyFinances.Core.Dependencies
 {
     public interface IBankAuthTokenProvider
     {
-        Task<Token> GetAccessToken(string code);
+        Task<Token> GetAccessTokenAsync(string code);
         Task<Token> GetAccessTokenWithRefreshToken(string refreshToken);
     }
 }

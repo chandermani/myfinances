@@ -28,7 +28,7 @@ namespace MyFinances.Core.Tests.Tokens
 
             // Assert
             result.Should().NotBeNull();
-            bankAuthTokenProvider.Verify(p => p.GetAccessToken("dummycode"), Times.Once);
+            bankAuthTokenProvider.Verify(p => p.GetAccessTokenAsync("dummycode"), Times.Once);
             userTokenStore.Verify(s => s.UpdateToken(UserIdentifier, result), Times.Once);
         }
 
@@ -57,7 +57,7 @@ namespace MyFinances.Core.Tests.Tokens
             userTokenStore = new Mock<IUserTokenStore>();
             bankAuthTokenProvider = new Mock<IBankAuthTokenProvider>();
 
-            bankAuthTokenProvider.Setup(p => p.GetAccessToken(It.IsAny<string>())).ReturnsAsync(new Token(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), DateTime.UtcNow));
+            bankAuthTokenProvider.Setup(p => p.GetAccessTokenAsync(It.IsAny<string>())).ReturnsAsync(new Token(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), DateTime.UtcNow));
 
             userTokenStore.Setup(s => s.GetToken(It.IsAny<string>())).Returns(new Token(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), DateTime.UtcNow));
         }

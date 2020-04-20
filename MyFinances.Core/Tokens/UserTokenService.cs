@@ -16,7 +16,7 @@ namespace MyFinances.Core.Tokens
 
         public async Task<Token> GenerateTokenAsync(string userIdentifier, string code)
         {
-            var token = await bankAuthTokenProvider.GetAccessToken(code);
+            var token = await bankAuthTokenProvider.GetAccessTokenAsync(code);
             userTokenStore.UpdateToken(userIdentifier, token);
             return token;
         }

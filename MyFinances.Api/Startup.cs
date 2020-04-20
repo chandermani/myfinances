@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MyFinances.Api.Integrations;
+using MyFinances.Core;
+using MyFinances.DataStore;
+using MyFinances.Integrations.TrueLayer;
 
 namespace MyFinances.Api
 {
@@ -25,6 +29,11 @@ namespace MyFinances.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<TrueLayerOAuthClientOptions>(Configuration.GetSection("TrueLayer"));
+            services.AddTransient<IStateDecoder, StateDecoder>();
+            services.AddDataStoreDependencies();
+            services.AddCoreDependencies();
+            services.AddTrueLayerDependencies();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -41,7 +50,7 @@ namespace MyFinances.Api
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

@@ -11,4 +11,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MyFinances.Core\MyFinances.Core.csproj" />
+    <ProjectReference Include="..\MyFinances.DataStore\MyFinances.DataStore.csproj" />
+    <ProjectReference Include="..\MyFinances.Integrations.TrueLayer\MyFinances.Integrations.TrueLayer.csproj" />
+  </ItemGroup>
+
 </Project>
