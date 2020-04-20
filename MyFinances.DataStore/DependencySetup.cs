@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MyFinances.Core;
 using MyFinances.Core.Dependencies;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,9 @@ namespace MyFinances.DataStore
     {
         public static void AddDataStoreDependencies(this IServiceCollection services)
         {
-            services.AddTransient<IUserTokenStore, UserTokenStore>();
+            services.AddSingleton<IUserTokenStore, UserTokenStore>();
+            services.AddSingleton<IUsersStore, UsersStore>();
+            services.AddSingleton<ITransactionStore, TransactionStore>();
         }
     }
 }

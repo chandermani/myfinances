@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MyFinances.Api.Integrations;
 using MyFinances.Core;
+using MyFinances.Core.Importer;
 using MyFinances.DataStore;
 using MyFinances.Integrations.TrueLayer;
 
@@ -30,6 +31,7 @@ namespace MyFinances.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<TrueLayerOAuthClientOptions>(Configuration.GetSection("TrueLayer"));
+            services.Configure<DataImportOptions>(Configuration.GetSection("DataImporter"));
             services.AddTransient<IStateDecoder, StateDecoder>();
             services.AddDataStoreDependencies();
             services.AddCoreDependencies();

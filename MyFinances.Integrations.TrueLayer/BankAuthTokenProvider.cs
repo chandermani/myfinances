@@ -23,6 +23,8 @@ namespace MyFinances.Integrations.TrueLayer
         {
             HttpClient client = new HttpClient() { BaseAddress = new Uri(truelayerOAuthClientOptions.AuthUri) };
             var response= await client.PostAsync("connect/token", BuildPostParameters(code));
+            response.EnsureSuccessStatusCode();
+
             return MapToToken(await response.Content.ReadAsStringAsync());
         }
 

@@ -6,6 +6,6 @@ namespace MyFinances.Core
 {
     public interface ITransactionsImporter
     {
-        Task<TransactionsImportResult> ImportTransactionsAsync(User user);
+        Task<TransactionsImportResult> ImportTransactionsAsync(string userIdentifier);
     }
 }

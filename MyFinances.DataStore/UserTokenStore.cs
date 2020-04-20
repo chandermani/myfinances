@@ -16,7 +16,7 @@ namespace MyFinances.DataStore
 
         public Token GetToken(string userIdentifier)
         {
-            return tokenCache.ContainsKey(userIdentifier) ? null : tokenCache[userIdentifier];
+            return tokenCache.ContainsKey(userIdentifier) ? tokenCache[userIdentifier] : null;
         }
 
         public void UpdateToken(string userIdentifier, Token token)

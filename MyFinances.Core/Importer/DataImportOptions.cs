@@ -6,11 +6,6 @@ namespace MyFinances.Core.Importer
 {
     public class DataImportOptions
     {
-        public DataImportOptions(int maxHistoricalTransactionToRetrieveInYears)
-        {
-            MaxHistoricalTransactionToRetrieveInYears = maxHistoricalTransactionToRetrieveInYears;
-        }
-
-        public int MaxHistoricalTransactionToRetrieveInYears { get; }
+        public int MaxHistoricalTransactionToRetrieveInYears { get; set; }
     }
 }
