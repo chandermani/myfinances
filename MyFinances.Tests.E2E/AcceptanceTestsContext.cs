@@ -18,6 +18,7 @@ namespace MyFinances.Tests.E2E
     {
         protected const string CommonUserIdentifier = "john@doe.com";
         protected HttpClient ApiClient;
+        protected IConfigurationRoot config;
         protected void SetupInMemoryTestServerAndData()
         {
             var clientFactory = new WebApplicationFactory<Startup>().WithWebHostBuilder(config =>
@@ -31,6 +32,10 @@ namespace MyFinances.Tests.E2E
                 HandleCookies = false,
                 BaseAddress = new Uri("http://localhost:5000")
             });
+
+            config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
 
         }
 
@@ -53,7 +58,7 @@ namespace MyFinances.Tests.E2E
             using (var browser = new BrowserSession(new HeadlessChromeWebDriverProfile(Browser.Chrome)))
             {
                 Options options = new Options() { Timeout = TimeSpan.FromSeconds(3) };
-                browser.Visit($"https://auth.truelayer-sandbox.com/?response_type=code&client_id=sandbox-chandermani-982283&scope=info%20accounts%20balance%20cards%20transactions%20direct_debits%20standing_orders%20offline_access&redirect_uri=http://localhost:5000/integration/truelayer/callback&providers=uk-ob-all%20uk-oauth-all%20uk-cs-mock&state={userIdentifier}");
+                browser.Visit($"{config["TrueLayerRedirectUri"]}&state={userIdentifier}");
                 browser.FindCss("button[type=submit]", options).Click();
                 browser.FindCss("#mock", options).Click();
                 browser.FindCss("input[type=text]", options).FillInWith("john");
