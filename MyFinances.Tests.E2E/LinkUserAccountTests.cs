@@ -17,7 +17,7 @@ namespace MyFinances.Tests.E2E
         public async Task When_access_code_is_returned_links_the_user_account()
         {
             // Arrange
-            var responseUri = GetAccessCodeResponse();
+            var responseUri = GetAccessCodeResponse(CommonUserIdentifier);
 
             // Act
             var result = await ApiClient.GetAsync(responseUri.PathAndQuery);

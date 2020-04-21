@@ -24,6 +24,11 @@ namespace MyFinances.Integrations.TrueLayer
         public HttpClient Build(User user)
         {
             var token = userTokenStore.GetToken(user.Identifier);
+            if(token==null)
+            {
+                throw new TokenNotFoundException($"Token associated with user identifier {user.Identifier} not found. Please establish a new connection.");
+            }
+
             var client = new HttpClient() { BaseAddress = new Uri(truelayerOAuthClientOptions.ApiUri) };
 
             // TODO: checks for expired header missing

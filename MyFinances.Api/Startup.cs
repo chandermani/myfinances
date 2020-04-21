@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MyFinances.Api.Integrations;
+using MyFinances.Api.Report;
 using MyFinances.Core;
 using MyFinances.Core.Importer;
 using MyFinances.DataStore;
@@ -32,7 +33,10 @@ namespace MyFinances.Api
         {
             services.Configure<TrueLayerOAuthClientOptions>(Configuration.GetSection("TrueLayer"));
             services.Configure<DataImportOptions>(Configuration.GetSection("DataImporter"));
+
             services.AddTransient<IStateDecoder, StateDecoder>();
+            services.AddSingleton<ITransactionSummaryContractMapper, TransactionSummaryContractMapper>();
+
             services.AddDataStoreDependencies();
             services.AddCoreDependencies();
             services.AddTrueLayerDependencies();
@@ -42,7 +46,7 @@ namespace MyFinances.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsEnvironment("E2E"))
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -50,9 +54,9 @@ namespace MyFinances.Api
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+                app.UseHttpsRedirection();
             }
 
-            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

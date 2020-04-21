@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MyFinances.Core.Importer;
 using MyFinances.Core.Tokens;
+using MyFinances.Core.Transactions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,7 @@ namespace MyFinances.Core
             services.AddTransient<IUserTokenService, UserTokenService>();
             services.AddTransient<ITransactionsImporter, TransactionsImporter>();
             services.AddTransient<IClock, Clock>();
+            services.AddTransient<ITransactionSummaryBuilder, TransactionSummaryBuilder>();
         }
     }
 }

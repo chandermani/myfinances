@@ -17,10 +17,10 @@ namespace MyFinances.Tests.E2E
         public async Task Should_import_transactions_for_john_doe()
         {
             // Arrange
-            await PersistAccessCode();
+            await PersistAccessCode(CommonUserIdentifier);
 
             // Act
-            var result = await ApiClient.PostAsync("users/john@doe.com/import", null);
+            var result = await ApiClient.PostAsync($"users/{CommonUserIdentifier}/import", null);
 
             // Assert
             result.EnsureSuccessStatusCode();

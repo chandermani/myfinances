@@ -22,11 +22,12 @@ namespace MyFinances.Api.Integrations
         }
 
         [HttpGet("callback")]
-        public async Task Callback(string code, string scope, string state)
+        public async Task<ActionResult> Callback(string code, string scope, string state)
         {
             // Since we do not have a user registration end point using use email as user identifier
             var requestState = stateDecoder.Decode(state);
             await userTokenService.GenerateTokenAsync(requestState.UserEmail, code);
+            return Ok();
         }
     }
 }

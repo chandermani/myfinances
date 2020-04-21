@@ -23,7 +23,7 @@ namespace MyFinances.Api.Import
         public async Task<ActionResult> ImportBankAccounts(string userIdentifier)
         {
             var result = await transactionsImporter.ImportTransactionsAsync(userIdentifier);
-            return Ok(result);
+            return Ok();
         }
     }
 }
