@@ -1,5 +1,5 @@
 # My Finances
-Personal Finance API that integrates with you bank
+Personal Finance API that integrates with your bank
 
 # Install and run
 - Build using .Net Core 2.2 this requires .Net Core 2.2 to be installed.
