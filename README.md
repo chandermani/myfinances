@@ -5,6 +5,10 @@ Personal Finance API that integrates with your bank
 - Build using .Net Core 2.2 this requires .Net Core 2.2 to be installed.
 - Unzip the file. Navigate the `myfinances` folder
 - run `dotnet restore`
+- Update `appsetting.json` and `appsetting.E2E.json` settings in `MyFinances.Api`
+  - ClientId
+  - ClientSecret
+  - RedirectUri
 - run `dotnet test`
 - There are three end to end tests that verify the API endpoints using an in memory host
 - Else from command line
